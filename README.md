@@ -20,7 +20,7 @@ Este projeto é uma aplicação web simples para cadastro, listagem, edição e 
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/MarioC3sar/atividadeBD.git
+   git clone https://github.com/viniilemes/des_web3
    cd crud-livros
    ```
 
@@ -68,7 +68,7 @@ crud-livros/
 
 ## Autor
 
-- MarioC3sar
+- viniilemes 
 
 ---
 
