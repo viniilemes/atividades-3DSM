@@ -1,0 +1,41 @@
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Build output
+dist/
+build/
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDEs and editors
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Optional: lockfile
+pnpm-lock.yaml
+
+# Local History
+.history/
+
+# Others
+coverage/
