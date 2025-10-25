@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self' http://localhost:3000 ws;">
+  <title>Cadastro de Discos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Gestão de Coleção: Vinil e CDs</h1>
+
+  <form id="disco-form">
+    <h2>Cadastrar / Editar Disco</h2>
+    <input type="hidden" id="disco-id">
+
+    <div class="form-group">
+      <label for="titulo">Título:</label>
+      <input type="text" id="titulo" required>
+    </div>
+    <div class="form-group">
+      <label for="artista">Artista:</label>
+      <input type="text" id="artista" required>
+    </div>
+    <div class="form-group">
+      <label for="ano">Ano:</label>
+      <input type="number" id="ano" required>
+    </div>
+    <div class="form-group">
+      <label for="genero">Gênero:</label>
+      <input type="text" id="genero" required>
+    </div>
+    <div class="form-group">
+      <label for="formato">Formato:</label>
+      <select id="formato" required>
+        <option value="">Selecione...</option>
+        <option value="Vinil">Vinil</option>
+        <option value="CD">CD</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="preco">Preço (R$):</label>
+      <input type="number" id="preco" step="0.01" required>
+    </div>
+
+    <button type="submit">Salvar Disco</button>
+    <button type="button" id="btn-cancelar" class="hidden">Cancelar Edição</button>
+  </form>
+
+  <hr>
+
+  <h2>Discos Cadastrados</h2>
+  <table id="discos-tabela">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Artista</th>
+        <th>Ano</th>
+        <th>Formato</th>
+        <th>Preço (R$)</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="discos-tbody">
+      </tbody>
+  </table>
+
+  <script src="./dist/main.js"></script>
+</body>
+</html>
