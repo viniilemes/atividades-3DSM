@@ -116,11 +116,5 @@ Observação: abra um terminal `cmd.exe` na pasta do projeto desejado.
 - Diferenças entre módulos ESM e CommonJS no Node e como adaptar projetos TypeScript.
 - Debugging: analisar erros do TypeScript, resolver problemas de compilação e lidar com políticas de segurança (CSP).
 
-## Contato / referência
 
-Se quiser testar alguma funcionalidade específica, gerar dados de exemplo ou receber ajuda para
-empacotar e publicar algum dos projetos, me avise e eu auxilio com os passos.
-
----
-_README gerado como resumo das atividades do 3º semestre — Fatec Jacareí (Desenvolvimento de Software Multiplataforma)._ 
 
