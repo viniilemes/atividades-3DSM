@@ -1,0 +1,5 @@
+# Ignorar arquivo de variáveis de ambiente com credenciais locais
+.env
+
+# Node modules (opcional se você commita package-lock)
+node_modules/

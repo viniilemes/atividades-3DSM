@@ -1,0 +1,14 @@
+{
+  "name": "bdn-aula-08",
+  "version": "1.0.0",
+  "description": "Exercícios de conexão MongoDB - Aula 08",
+  "main": "index.js",
+  "scripts": {
+    "testar-conexao": "node testar-conexao/testarConexao.js",
+    "testar-logs": "node testar-conexao/testarLogs.js"
+  },
+  "dependencies": {
+    "mongoose": "^8.19.2",
+    "dotenv": "^16.3.1"
+  }
+}
