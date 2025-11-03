@@ -1,0 +1,32 @@
+# Node
+node_modules/
+dist/
+npm-debug.log*
+.env
+.env.*
+
+# TypeScript
+*.tsbuildinfo
+
+# Python
+venv/
+venv/Scripts/
+__pycache__/
+*.pyc
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Ignore local secrets or config
+secrets.json
+config.local.json
+
+# Ignore emails list (sensitive)
+emails.csv
