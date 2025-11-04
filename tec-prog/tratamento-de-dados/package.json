@@ -1,0 +1,16 @@
+{
+  "name": "tratamento-de-dados",
+  "version": "1.0.0",
+  "main": "converterNomes.js",
+  "scripts": {
+    "start": "node converterNomes.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "csv-parser": "^3.2.0"
+  }
+}
