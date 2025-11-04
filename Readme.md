@@ -40,7 +40,7 @@ Observação: abra um terminal `cmd.exe` na pasta do projeto desejado.
 	- O `npm start` compila (`tsc`) e executa `node dist/server.js`.
 	- O servidor roda por padrão em: http://localhost:3000
 
-2. Frontend (servidor estático simples):
+2. Frontend (servidor estático simples)
 
 	cd discos-crud\frontend
 	npm run start
