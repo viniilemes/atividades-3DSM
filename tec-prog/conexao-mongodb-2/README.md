@@ -58,3 +58,15 @@ npm run dev
 
 ## Contato
 Projeto criado para fins didáticos.
+
+## Segurança — Variáveis de ambiente
+Não inclua variáveis sensíveis (senhas, chaves, URIs com credenciais) no controle de versão. Este repositório já possui um arquivo `.gitignore` que exclui arquivos de ambiente (`.env`).
+
+Use o arquivo `.env.example` como modelo ao compartilhar o projeto. Para rodar localmente, copie o arquivo de exemplo e preencha os valores reais em um arquivo `.env` que NÃO deve ser comitado:
+
+```bash
+cp .env.example .env
+# editar .env com os valores reais (no Windows use: copy .env.example .env e depois edite)
+```
+
+Se por acaso variáveis sensíveis aparecerem no histórico do git, remova-as com ferramentas como `git filter-repo` ou `git-filter-branch` e altere as credenciais comprometidas.
