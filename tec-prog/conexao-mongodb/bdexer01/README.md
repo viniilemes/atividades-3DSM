@@ -18,15 +18,41 @@ npm install
 
 ## Variáveis de ambiente
 
-O projeto usa `dotenv`. Por padrão `src/models/connection.ts` usa a URI `mongodb://127.0.0.1:27017/bdexer01`.
-Se quiser usar uma URI diferente, crie um arquivo `.env` na raiz com:
+O projeto usa `dotenv`. Para evitar expor segredos no repositório, criamos um arquivo de exemplo chamado `.env.example` com as chaves esperadas (sem valores). Nunca comite o arquivo `.env` com valores reais.
+
+Copie `.env.example` para `.env` e preencha os valores locais:
+
+- No Windows (cmd.exe):
+
+```cmd
+copy .env.example .env
+```
+
+- No Unix/macOS:
+
+```sh
+cp .env.example .env
+```
+
+O arquivo `.env.example` contém (exemplo):
 
 ```
 PORT=3001
-MONGO_URI=mongodb://usuario:senha@host:porta/nomeDoBanco
+MONGO_URI=
+JWT_SECRET=
 ```
 
-E então altere `src/models/connection.ts` para ler `process.env.MONGO_URI` ou me peça para fazer isso automaticamente.
+No código (por exemplo em `src/models/connection.ts`) você deve ler a URI do Mongo a partir de `process.env.MONGO_URI`. Se quiser, eu posso atualizar `connection.ts` para usar `process.env.MONGO_URI` automaticamente.
+
+Se você já comitou um arquivo `.env` com segredos, remova-o do repositório (mantendo local) e envie a alteração:
+
+```cmd
+git rm --cached .env
+git commit -m "Remover .env do repositório"
+git push
+```
+
+Além disso, rotacione (troque) quaisquer credenciais possivelmente comprometidas.
 
 ## Scripts úteis
 
