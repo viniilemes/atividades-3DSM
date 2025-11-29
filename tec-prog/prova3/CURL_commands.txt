@@ -1,0 +1,32 @@
+# Comandos CURL de exemplo
+
+# Observação: o servidor em `src/index.ts` registra as rotas em `/api`.
+# Se você executa o servidor com `PORT=3001`, as URLs completas serão `http://localhost:3001/api/<rota>`.
+# Abaixo há exemplos com e sem o prefixo `/api` (use o que for aplicável no seu ambiente).
+
+# 1) Criar Militar
+curl -X POST http://localhost:3001/api/militar -H "Content-Type: application/json" -d '{"nome": "Joao Silva", "idade": 25, "email": "joao@eb.mil.br", "fone": "12999998888"}'
+
+# Exemplo (sem /api) caso você tenha mudado o mount point:
+curl -X POST http://localhost:3001/militar -H "Content-Type: application/json" -d '{"nome": "Joao Silva", "idade": 25, "email": "joao@eb.mil.br", "fone": "12999998888"}'
+
+# 2) Listar Militares
+curl http://localhost:3001/api/militar
+
+# 3) Atualizar Militar (envie o campo id no body)
+curl -X PUT http://localhost:3001/api/militar -H "Content-Type: application/json" -d '{"id": "<MILITAR_ID>", "nome": "Joao Silva Atualizado"}'
+
+# 4) Deletar Militar (envie o campo id no body)
+curl -X DELETE http://localhost:3001/api/militar -H "Content-Type: application/json" -d '{"id": "<MILITAR_ID>"}'
+
+# Soldado
+curl -X POST http://localhost:3001/api/soldado -H "Content-Type: application/json" -d '{"cim": "12345", "altura": 1.75, "militar": "<MILITAR_ID>"}'
+curl http://localhost:3001/api/soldado
+curl -X PUT http://localhost:3001/api/soldado -H "Content-Type: application/json" -d '{"id": "<SOLDADO_ID>", "altura": 1.78}'
+curl -X DELETE http://localhost:3001/api/soldado -H "Content-Type: application/json" -d '{"id": "<SOLDADO_ID>"}'
+
+# Patente
+curl -X POST http://localhost:3001/api/patente -H "Content-Type: application/json" -d '{"codigo": "P01", "descricao": "Soldado"}'
+curl http://localhost:3001/api/patente
+curl -X PUT http://localhost:3001/api/patente -H "Content-Type: application/json" -d '{"id": "<PATENTE_ID>", "descricao": "Cabo"}'
+curl -X DELETE http://localhost:3001/api/patente -H "Content-Type: application/json" -d '{"id": "<PATENTE_ID>"}'

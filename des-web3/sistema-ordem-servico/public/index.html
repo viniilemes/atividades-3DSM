@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ServiceFlix - Ordens de Serviço</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #141414;
+      --card-bg: #1f1f1f;
+      --primary-red: #e50914;
+      --primary-red-hover: #f40612;
+      --text-white: #ffffff;
+      --text-gray: #b3b3b3;
+      --input-bg: #333;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-white);
+      font-family: 'Roboto', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* --- Navbar --- */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 4%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0));
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      color: var(--primary-red);
+      font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .btn-add {
+      background-color: var(--primary-red);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-add:hover { background-color: var(--primary-red-hover); }
+
+    /* --- Hero Section (Destaque) --- */
+    .hero {
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 4%;
+      background: linear-gradient(to top, #141414, transparent 50%),
+                  url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+
+    /* --- Listas Horizontais (Estilo Carrossel) --- */
+    .section-title {
+      font-size: 1.2rem;
+      color: #e5e5e5;
+      margin: 20px 4% 10px;
+      font-weight: 700;
+    }
+
+    .row-container {
+      padding: 0 4% 40px;
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      scrollbar-width: none; /* Firefox */
+    }
+    .row-container::-webkit-scrollbar { display: none; } /* Chrome */
+
+    .card {
+      background-color: var(--card-bg);
+      min-width: 250px;
+      max-width: 250px;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.3s ease, z-index 0.3s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: scale(1.1);
+      z-index: 10;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    .card-header {
+      height: 120px;
+      background: linear-gradient(135deg, #333, #111);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #555;
+    }
+
+    .card-body {
+      padding: 12px;
+    }
+
+    .card-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-meta {
+      font-size: 0.75rem;
+      color: #46d369; /* Verde estilo match do Netflix */
+      margin-bottom: 8px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .card-desc {
+      font-size: 0.8rem;
+      color: var(--text-gray);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 3.6em;
+    }
+
+    .badge {
+      padding: 2px 6px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 2px;
+      font-size: 0.6rem;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    /* Cores de Prioridade */
+    .p-alta { border-color: #ff4d4d; color: #ff4d4d; }
+    .p-media { border-color: #ffcc00; color: #ffcc00; }
+    .p-baixa { border-color: #46d369; color: #46d369; }
+
+    /* --- Modal (Formulário) --- */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none; /* Hidden by default */
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: #181818;
+      padding: 30px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .modal-content h2 { margin-bottom: 20px; color: white; }
+
+    input, select, textarea {
+      width: 100%;
+      background: #333;
+      border: none;
+      border-radius: 4px;
+      padding: 12px;
+      color: white;
+      margin-bottom: 16px;
+      font-family: inherit;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid #555;
+      background: #444;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary-red);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-cancel {
+      background: transparent;
+      color: #aaa;
+      border: none;
+      margin-top: 10px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">SERVICEFLIX</div>
+    <button class="btn-add" onclick="toggleModal(true)">+ Nova Ordem</button>
+  </header>
+
+  <section class="hero">
+    <h1>Controle Corporativo</h1>
+    <p>Gerencie manutenções, suporte técnico e solicitações operacionais com agilidade e precisão.</p>
+    <div>
+      <button class="btn-add" style="padding: 12px 24px; font-size: 1.1rem;" onclick="toggleModal(true)">
+        &#9658; Abrir Chamado
+      </button>
+      <button class="btn-add" style="background: rgba(109, 109, 110, 0.7); margin-left: 10px; padding: 12px 24px; font-size: 1.1rem;">
+        &#9432; Mais Informações
+      </button>
+    </div>
+  </section>
+
+  <div id="app-content">
+    <h3 class="section-title">Minha Lista (Abertas)</h3>
+    <div class="row-container" id="lista-aberta"></div>
+
+    <h3 class="section-title">Em Andamento</h3>
+    <div class="row-container" id="lista-andamento"></div>
+
+    <h3 class="section-title">Concluídas Recentemente</h3>
+    <div class="row-container" id="lista-concluida"></div>
+  </div>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal-content">
+      <h2>Criar Nova Ordem</h2>
+      <form id="form-criar">
+        <input name="titulo" placeholder="Título do problema" required />
+        <textarea name="descricao" rows="3" placeholder="Descrição detalhada" required></textarea>
+        
+        <select name="prioridade" required>
+          <option value="" disabled selected>Selecione a Prioridade</option>
+          <option value="baixa">Baixa</option>
+          <option value="média">Média</option>
+          <option value="alta">Alta</option>
+        </select>
+        
+        <input name="setorSolicitante" placeholder="Setor Solicitante (Ex: TI, RH)" required />
+        <input name="valorServico" type="number" step="0.01" placeholder="Valor Estimado (R$)" required />
+        
+        <button type="submit" class="btn-submit">Salvar Ordem</button>
+        <button type="button" class="btn-cancel" onclick="toggleModal(false)">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const apiBase = '/ordens';
+
+    // Controle do Modal
+    function toggleModal(show) {
+      document.getElementById('modal').style.display = show ? 'flex' : 'none';
+    }
+
+    // Função para criar o HTML do Card
+    function createCard(order) {
+      // Definir cor baseada na prioridade para um detalhe visual
+      let pClass = 'p-baixa';
+      if(order.prioridade === 'média') pClass = 'p-media';
+      if(order.prioridade === 'alta') pClass = 'p-alta';
+
+      const valorFormatado = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(order.valorServico);
+
+      return `
+        <div class="card">
+          <div class="card-header" style="background-color: ${order.prioridade === 'alta' ? '#5e1b1b' : '#333'}">
+            <span>${order.setorSolicitante.charAt(0).toUpperCase()}</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">${order.titulo}</div>
+            <div class="card-meta">
+              <span style="color: #46d369;">98% Relevância</span>
+              <span class="badge ${pClass}">${order.prioridade}</span>
+              <span class="badge">R$ ${order.valorServico}</span>
+            </div>
+            <div class="card-desc">${order.descricao}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    async function fetchOrdens() {
+      try {
+        const res = await fetch(apiBase);
+        const data = await res.json();
+        
+        // Limpar listas
+        const containers = {
+          'aberta': document.getElementById('lista-aberta'),
+          'em andamento': document.getElementById('lista-andamento'),
+          'concluída': document.getElementById('lista-concluida')
+        };
+        
+        Object.values(containers).forEach(el => el.innerHTML = '<p style="color: #555; padding: 20px;">Nenhum item encontrado.</p>');
+
+        // Distribuir cards nas listas corretas
+        data.forEach(o => {
+            const statusKey = o.status.toLowerCase();
+            if (containers[statusKey]) {
+                // Se for o primeiro item, limpa a msg de "nenhum item"
+                if(containers[statusKey].innerHTML.includes('Nenhum item')) containers[statusKey].innerHTML = '';
+                containers[statusKey].innerHTML += createCard(o);
+            }
+        });
+
+      } catch (error) {
+        console.error("Erro ao carregar ordens", error);
+      }
+    }
+
+    // Submit do Formulário
+    document.getElementById('form-criar').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      
+      const body = {
+        titulo: form.titulo.value,
+        descricao: form.descricao.value,
+        prioridade: form.prioridade.value,
+        setorSolicitante: form.setorSolicitante.value,
+        valorServico: Number(form.valorServico.value),
+        status: 'aberta' // Default conforme PDF
+      };
+
+      try {
+        const response = await fetch(apiBase, { 
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify(body) 
+        });
+
+        if(response.ok) {
+            form.reset();
+            toggleModal(false);
+            fetchOrdens(); // Recarrega a lista
+        } else {
+            alert('Erro ao criar ordem');
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    });
+
+    // Carregar ao iniciar
+    fetchOrdens();
+  </script>
+</body>
+</html>

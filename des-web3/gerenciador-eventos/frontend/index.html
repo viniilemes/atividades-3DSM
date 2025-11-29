@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Eventos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🗓️ Gerenciador de Eventos</h1>
+
+        <section id="form-section">
+            <h2>Adicionar Novo Evento</h2>
+            <form id="event-form">
+                <input type="hidden" id="event-id">
+                
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" required>
+
+                <label for="descricao">Descrição (opcional):</label>
+                <textarea id="descricao"></textarea>
+
+                <label for="data">Data:</label>
+                <input type="datetime-local" id="data" required>
+
+                <label for="local">Local:</label>
+                <input type="text" id="local" required>
+
+                <label for="valor">Valor (Float):</label>
+                <input type="number" id="valor" step="0.01" required>
+
+                <button type="submit" id="submit-btn">Adicionar Evento</button>
+            </form>
+            <p id="message" class="hidden"></p>
+        </section>
+
+        <hr>
+
+        <section id="list-section">
+            <h2>Lista de Eventos</h2>
+            <div class="search-bar">
+                <input type="text" id="search-title" placeholder="Pesquisar por título...">
+                <button id="search-btn">Pesquisar / Recarregar</button>
+            </div>
+            
+            <div id="events-list">
+                <p>Carregando eventos...</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
