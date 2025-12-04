@@ -30,3 +30,6 @@ curl -X POST http://localhost:3001/api/patente -H "Content-Type: application/jso
 curl http://localhost:3001/api/patente
 curl -X PUT http://localhost:3001/api/patente -H "Content-Type: application/json" -d '{"id": "<PATENTE_ID>", "descricao": "Cabo"}'
 curl -X DELETE http://localhost:3001/api/patente -H "Content-Type: application/json" -d '{"id": "<PATENTE_ID>"}'
+
+# Popular DB
+.\curl_examples.ps1
