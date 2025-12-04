@@ -31,5 +31,8 @@ curl http://localhost:3001/api/patente
 curl -X PUT http://localhost:3001/api/patente -H "Content-Type: application/json" -d '{"id": "<PATENTE_ID>", "descricao": "Cabo"}'
 curl -X DELETE http://localhost:3001/api/patente -H "Content-Type: application/json" -d '{"id": "<PATENTE_ID>"}'
 
-# Popular DB
+# Popular DB PowerShell
 .\curl_examples.ps1
+
+# Rodar projeto PowerShell
+$env:PORT='3001'; npm run dev

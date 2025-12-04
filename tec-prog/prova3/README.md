@@ -1,8 +1,3 @@
-Aqui está o conteúdo completo e formatado para o seu arquivo `README.md`. Ele foi elaborado para destacar que você cumpriu todos os requisitos técnicos descritos no PDF da prova, como as validações de regex, ordenação e `populate`.
-
-Basta criar um arquivo chamado **`README.md`** na raiz do seu projeto e colar o código abaixo:
-
-````markdown
 # Prova III B - Técnicas de Programação II
 
 Este projeto é uma API RESTful desenvolvida com **Node.js**, **TypeScript** e **Mongoose** para o gerenciamento de uma base de dados militar. A aplicação segue o padrão MVC e implementa validações rigorosas de dados e relacionamentos entre documentos.
